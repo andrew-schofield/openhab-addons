@@ -178,7 +178,7 @@ public class DraytonWiserDiscoveryService extends AbstractDiscoveryService
             logger.debug("Smart Value discovered, serialnumber: {}", device.getSerialNumber());
             final Map<String, Object> properties = new HashMap<>();
 
-            DraytonWiserPropertyHelper.setSmartPlugProperties(device, properties, smartPlug.getName());
+            DraytonWiserPropertyHelper.setSmartPlugProperties(device, properties);
             final DiscoveryResult discoveryResult = DiscoveryResultBuilder
                     .create(new ThingUID(THING_TYPE_SMARTPLUG, bridgeUID,
                             smartPlug.getName().replaceAll("[^A-Za-z0-9]", "").toLowerCase()))
