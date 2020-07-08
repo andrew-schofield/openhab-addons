@@ -178,7 +178,7 @@ abstract class DraytonWiserThingHandler<T> extends BaseThingHandler implements D
     }
 
     protected T getData() {
-        final T data = this.data;
+        final @Nullable T data = this.data;
 
         if (data == null) {
             throw new IllegalStateException("Data not set");
