@@ -92,9 +92,10 @@ abstract class DraytonWiserThingHandler<T> extends BaseThingHandler implements D
     }
 
     private void disposehandleCommandRefreshFuture(final boolean force) {
-        if (handleCommandRefreshFuture != null) {
-            handleCommandRefreshFuture.cancel(force);
-            handleCommandRefreshFuture = null;
+        final ScheduledFuture<?> future = handleCommandRefreshFuture;
+
+        if (future != null) {
+            future.cancel(force);
         }
     }
 

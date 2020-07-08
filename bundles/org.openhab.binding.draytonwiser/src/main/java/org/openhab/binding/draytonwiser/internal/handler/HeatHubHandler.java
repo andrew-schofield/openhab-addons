@@ -149,15 +149,18 @@ public class HeatHubHandler extends BaseBridgeHandler {
 
     @Override
     public void dispose() {
-        if (refreshJob != null) {
-            refreshJob.cancel(true);
-            refreshJob = null;
+        final ScheduledFuture<?> future = refreshJob;
+
+        if (future != null) {
+            future.cancel(true);
         }
     }
 
     private void notifyListeners(final DraytonWiserDTO domain) {
-        if (discoveryService != null) {
-            discoveryService.onRefresh(domain);
+        final DraytonWiserRefreshListener discoveryListener = discoveryService;
+
+        if (discoveryListener != null) {
+            discoveryListener.onRefresh(domain);
         }
         getThing().getThings().stream().map(Thing::getHandler)
                 .filter(handler -> handler instanceof DraytonWiserRefreshListener)
